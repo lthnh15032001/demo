@@ -29,9 +29,9 @@ pipeline {
         // }
          stage('Send Email') {
             steps {
-                emailext body: 'The Android SDK has been built and attached to this email.', 
-                emailext to: 'ltdat@rogo.com.vn', 
-                subject: 'Android SDK Build Complete'
+                emailext to: ['ltdat@rogo.com.vn','tan.nguyenvan@rogo.com.vn'], 
+                subject: 'Android SDK Build Complete',
+                body: 'The Android SDK has been built and attached to this email.'
             }
         }
     }
