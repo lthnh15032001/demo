@@ -31,8 +31,7 @@ pipeline {
             steps {
                 emailext body: 'The Android SDK has been built and attached to this email.',
                 recipientList: ['ltdat@rogo.com.vn'],
-                subject: 'Android SDK Build Complete',
-                // attachments: [file: 'my-android-sdk.apk']
+                subject: 'Android SDK Build Complete'
             }
         }
     }
