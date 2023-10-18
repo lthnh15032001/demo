@@ -33,6 +33,7 @@ pipeline {
                     def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn'] // Replace with the email addresses of the recipients
                     def recipientList = recipients.join(',')
                     emailext to: recipientList,
+                    from: 'jenkins@rogo.com.vn',
                     subject: 'Android SDK Build Complete',
                     body: 'The Android SDK has been built and attached to this email.'
                 }
