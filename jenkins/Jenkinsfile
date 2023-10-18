@@ -30,7 +30,7 @@ pipeline {
          stage('Send Email') {
             steps {
                 emailext body: 'The Android SDK has been built and attached to this email.', 
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                emailext to: 'ltdat@rogo.com.vn', 
                 subject: 'Android SDK Build Complete'
             }
         }
