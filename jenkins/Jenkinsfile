@@ -29,8 +29,8 @@ pipeline {
         // }
          stage('Send Email') {
             steps {
-                emailext body: 'The Android SDK has been built and attached to this email.',
-                recipientProviders: ['ltdat@rogo.com.vn'],
+                emailext body: 'The Android SDK has been built and attached to this email.', 
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                 subject: 'Android SDK Build Complete'
             }
         }
