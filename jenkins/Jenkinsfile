@@ -11,6 +11,11 @@ pipeline {
                 archiveArtifacts artifacts: '**/*.apk'
             }
         }
+         stage('Logs') {
+            steps {
+                echo 'Do some shitty things' 
+            }
+        }
 
         // stage('Test') {
         //     steps {
