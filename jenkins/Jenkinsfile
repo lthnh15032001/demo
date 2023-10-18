@@ -1,29 +1,34 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent any 
     stages {
-        stage('Build') {
+        stage('Static Analysis') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                echo 'Run the static analysis to the code' 
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         sh 'mvn test'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'target/surefire-reports/*.xml'
-        //         }
-        //     }
-        // }
-        stage('Deliver') {
+        stage('Compile') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                echo 'Compile the source code' 
+            }
+        }
+        stage('Security Check') {
+            steps {
+                echo 'Run the security check against the application' 
+            }
+        }
+        stage('Run Unit Tests') {
+            steps {
+                echo 'Run unit tests from the source code' 
+            }
+        }
+        stage('Run Integration Tests') {
+            steps {
+                echo 'Run only crucial integration tests from the source code' 
+            }
+        }
+        stage('Publish Artifacts') {
+            steps {
+                echo 'Save the assemblies generated from the compilation' 
             }
         }
     }
