@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "rogo.iot.app.tv.playrogotv.dev"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "rogo.iot.app.tv.playrogotv.dev"
