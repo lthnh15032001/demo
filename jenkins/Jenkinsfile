@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        // stage('Build') {
-        //     steps {
-        //        sh '../gradlew assembleRelease'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+               sh '../gradlew assembleDebug'
+            }
+        }
         // stage('Archive') {
         //     steps {
         //         archiveArtifacts artifacts: '**/*.apk'
