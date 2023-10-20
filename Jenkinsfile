@@ -6,6 +6,11 @@ pipeline {
                sh './gradlew assembleDebug'
             }
         }
+         stage('BuildRelease') {
+            steps {
+               sh './gradlew assembleRelease'
+            }
+        }
         // stage('Archive') {
         //     steps {
         //         archiveArtifacts artifacts: '**/*.apk'
