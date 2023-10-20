@@ -16,7 +16,7 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME != 'master'){
                         echo 'This  not master '
-                        echo ${env.BRANCH_NAME}
+                        echo "${env.BRANCH_NAME}"
                         sh './gradlew assembleRelease'
                     }
                 }
