@@ -11,11 +11,11 @@ pipeline {
                sh './gradlew assembleRelease'
             }
         }
-        // stage('Archive') {
-        //     steps {
-        //         archiveArtifacts artifacts: '**/*.apk'
-        //     }
-        // }
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: '**/*.apk'
+            }
+        }
         //  stage('Logs') {
         //     steps {
         //         echo 'Do some shitty things' 
