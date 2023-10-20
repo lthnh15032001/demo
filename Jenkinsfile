@@ -14,7 +14,7 @@ pipeline {
          stage('BuildRelease') { 
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'master'){
+                    if (env.BRANCH_NAME != 'master'){
                         echo 'This  not master '
                         sh './gradlew assembleRelease'
                     }
