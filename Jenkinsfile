@@ -11,12 +11,14 @@ pipeline {
                sh './gradlew assembleDebug'
             }
         }
-         stage('BuildRelease') {
-            when {
-                branch 'master'
-            }
+         stage('BuildRelease') { 
             steps {
-               sh './gradlew assembleRelease'
+                script: {
+                    if (env.BRANCH_NAME == 'master'){
+                        echo 'This  not master '
+                        sh './gradlew assembleRelease'
+                    }
+                }
             }
         }
         stage('Archive') {
@@ -30,8 +32,9 @@ pipeline {
                     script {
                         def identity=awsIdentity(); 
                         echo "${identity}"
-                        files=s3FindFiles(bucket:'rogo-assets', path: 'images/00011810380400A0/')
-                        echo "${files}"
+                        
+                        // files=s3FindFiles(bucket:'rogo-assets', path: 'images/00011810380400A0/')
+                        // echo "${files}"
                     }
                 }
             }
