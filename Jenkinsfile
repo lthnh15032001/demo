@@ -33,8 +33,8 @@ pipeline {
                         def identity=awsIdentity(); 
                         echo "${identity}"
                         
-                        // files=s3FindFiles(bucket:'rogo-assets', path: 'images/00011810380400A0/')
-                        // echo "${files}"
+                        files=s3FindFiles(bucket:'rogo-assets', path: 'images/00011810380400A0/')
+                        echo "${files}"
                     }
                 }
             }
