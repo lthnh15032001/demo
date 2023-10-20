@@ -2,6 +2,11 @@ pipeline {
     agent any
     stages {
         stage('Build') {
+            when {
+                not {
+                    branch 'master'
+                }
+            }
             steps {
                sh './gradlew assembleDebug'
             }
@@ -25,7 +30,8 @@ pipeline {
                     script {
                         def identity=awsIdentity(); 
                         echo "${identity}"
-                        s3FindFiles(bucket:'rogo-assets', glob: 'images/00011810380400A0/img_section_smarthome_hub.png')
+                        def files=s3FindFiles(bucket:'rogo-assets', glob: 'images/00011810380400A0/img_section_smarthome_hub.png')
+                        echo "${files}"
                     }
                 }
             }
