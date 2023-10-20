@@ -7,6 +7,9 @@ pipeline {
             }
         }
          stage('BuildRelease') {
+            when {
+                branch 'master'
+            }
             steps {
                sh './gradlew assembleRelease'
             }
@@ -16,22 +19,18 @@ pipeline {
                 archiveArtifacts artifacts: '**/*.apk'
             }
         }
-        //  stage('Logs') {
-        //     steps {
-        //         echo 'Do some shitty things' 
-        //     }
-        // }
+        stage('Upload') {
+            steps {
+                 withAWS(region:'ap-southeast-1',credentials:'cfbdb86b-1a64-46ff-8d4a-079174dad4a9') {
 
-        // stage('Test') {
-        //     steps {
-        //         sh 'mvn test'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'target/surefire-reports/*.xml'
-        //         }
-        //     }
-        // }
+                def identity=awsIdentity();//Log AWS credentials
+                echo "${identity}"
+                // Upload files from working directory 'dist' in your project workspace
+                    // s3Upload(bucket:"yourBucketName", workingDir:'dist', includePathPattern:'**/*');
+                s3FindFiles(bucket:'rogo-assets')
+                }
+            }
+        }
          stage('Send Email') {
             steps {
                 script {
