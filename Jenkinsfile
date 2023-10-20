@@ -35,7 +35,7 @@ pipeline {
          stage('Send Email') {
             steps {
                 script {
-                    def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn'] // Replace with the email addresses of the recipients
+                    def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn', 'lthnh15032001@gmail.com'] // Replace with the email addresses of the recipients
                     def recipientList = recipients.join(',')
                     emailext to: recipientList,
                     from: 'jenkins@rogo.com.vn',
