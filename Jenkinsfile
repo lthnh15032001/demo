@@ -30,7 +30,7 @@ pipeline {
                     script {
                         def identity=awsIdentity(); 
                         echo "${identity}"
-                        def files=s3FindFiles(bucket:'rogo-assets', glob: 'images/00011810380400A0/img_section_smarthome_hub.png')
+                        files=s3FindFiles(bucket:'rogo-assets', path: 'images/00011810380400A0/')
                         echo "${files}"
                     }
                 }
