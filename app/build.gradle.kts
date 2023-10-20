@@ -33,6 +33,21 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+      signingConfigs {
+        create("release") {
+            // You need to specify either an absolute path or include the
+            // keystore file in the same directory as the build.gradle file.
+            storeFile = file("../key")
+            storePassword = "nao123456"
+            keyAlias = "nao123456"
+            keyPassword = "nao123456"
+        }
+    }
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
 }
 
 dependencies {

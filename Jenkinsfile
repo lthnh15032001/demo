@@ -40,7 +40,8 @@ pipeline {
                     emailext to: recipientList,
                     from: 'jenkins@rogo.com.vn',
                     subject: 'Android SDK Build Complete',
-                    body: 'The Android SDK has been built and attached to this email.'
+                    body: 'The Android SDK has been built and attached to this email.',
+                    attachmentsPattern: '**/*.apk'
                 }
             }
         }
