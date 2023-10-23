@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk11  # Adjust the Java version as needed
+
+  build:
+    commands:
+      - ./gradlew assembleDebug
+      - if [ $CODEBUILD_RESOLVED_SOURCE_VERSION != "refs/heads/master" ]; then ./gradlew assembleRelease; fi
+
+artifacts:
+  files: '**/*.apk'
+
+cache:
+  paths:
+    - ~/.gradle/caches/
+
+env:
+  variables:
+    S3_BUCKET: 'jenkins-sdk'  # Replace with your S3 bucket name
+
+post_build:
+  commands:
+    - |
+      if [ $CODEBUILD_RESOLVED_SOURCE_VERSION != "refs/heads/master" ]; then
+        aws s3 cp app/build/outputs/apk/release/*.apk s3://${S3_BUCKET}/$CODEBUILD_RESOLVED_SOURCE_VERSION/
+      else
+        aws s3 cp app/build/outputs/apk/debug/*.apk s3://${S3_BUCKET}/$CODEBUILD_RESOLVED_SOURCE_VERSION/
+      fi
