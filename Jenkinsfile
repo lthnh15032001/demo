@@ -35,12 +35,13 @@ pipeline {
                         def identity=awsIdentity(); 
                         echo "${identity}"
                         echo "${JOB_NAME}-${BUILD_NUMBER}"
+                        def commitMessage = sh(script: 'git log -1 --pretty=format:%s', returnStdout: true).trim()
                         blocks = [
                             [
                                 "type": "section",
                                 "text": [
                                     "type": "mrkdwn",
-                                    "text": "Hello, Assistant to the Regional Manager Dwight! *Michael Scott* wants to know where you'd like to take the Paper Company investors to dinner tonight.\n\n *Please select a restaurant:*"
+                                    "text": "🚀🚀🚀 #${BUILD_NUMBER}-${JOB_NAME}, \n\n *${commitMessage}* "
                                 ]
                             ],
                             [
