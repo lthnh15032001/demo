@@ -36,6 +36,7 @@ pipeline {
                         echo "${identity}"
                         echo "${JOB_NAME}-${BUILD_NUMBER}"
                         def commitMessage = sh(script: 'git log -1 --pretty=format:%s', returnStdout: true).trim()
+                        echo "${commitMessage}"
                         blocks = [
                             [
                                 "type": "section",
@@ -68,19 +69,19 @@ pipeline {
                 }
             }
         }
-         stage('Send Email') {
-            steps {
-                script {
-                    def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn'] // Replace with the email addresses of the recipients
-                    def recipientList = recipients.join(',')
-                    emailext to: recipientList,
-                    from: 'jenkins@rogo.com.vn',
-                    subject: 'Android SDK Build Complete',
-                    body: 'The Android SDK has been built and attached to this email.',
-                    attachmentsPattern: '**/*.apk'
-                }
-            }
-        }
+        //  stage('Send Email') {
+        //     steps {
+        //         script {
+        //             def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn'] // Replace with the email addresses of the recipients
+        //             def recipientList = recipients.join(',')
+        //             emailext to: recipientList,
+        //             from: 'jenkins@rogo.com.vn',
+        //             subject: 'Android SDK Build Complete',
+        //             body: 'The Android SDK has been built and attached to this email.',
+        //             attachmentsPattern: '**/*.apk'
+        //         }
+        //     }
+        // }
     }
     post { 
         failure { 
