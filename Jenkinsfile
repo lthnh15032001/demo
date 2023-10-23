@@ -6,6 +6,7 @@ pipeline {
                 script {
                     if (env.GIT_BRANCH != 'master'){
                         echo 'This is debug '
+                        echo "${env.GIT_BRANCH}"
                         sh './gradlew assembleDebug'
                     }
                 }
@@ -16,7 +17,7 @@ pipeline {
                 script {
                     if (env.GIT_BRANCH == 'master'){
                         echo 'This is master '
-                        echo "${env.BRANCH_NAME}"
+                        echo "${env.GIT_BRANCH}"
                         sh './gradlew assembleRelease'
                     }
                 }
@@ -60,6 +61,8 @@ pipeline {
                         ]
 
                         slackSend(channel: "#jenkins-notify", blocks: blocks)
+
+                        slackUploadFile filePath: '**/*.apk', initialComment:  "HEY HEY"
                     }
                 }
             }
