@@ -4,7 +4,7 @@ pipeline {
         stage('BuildDebug') {
             steps {
                 script {
-                    if (env.GIT_BRANCH != 'master'){
+                    if (env.GIT_BRANCH != 'origin/master'){
                         echo 'This is debug '
                         echo "${env.GIT_BRANCH}"
                         sh './gradlew assembleDebug'
@@ -15,7 +15,7 @@ pipeline {
          stage('BuildRelease') { 
             steps {
                 script {
-                    if (env.GIT_BRANCH == 'master'){
+                    if (env.GIT_BRANCH == 'origin/master'){
                         echo 'This is master '
                         echo "${env.GIT_BRANCH}"
                         sh './gradlew assembleRelease'
