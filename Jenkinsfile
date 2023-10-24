@@ -49,7 +49,7 @@ pipeline {
                                 "type": "section",
                                 "text": [
                                     "type": "mrkdwn",
-                                    "text": "*SDK has been builded successfully*\n:star::star::star::star: 1528 reviews\n "
+                                    "text": "*SDK has been builded successfully*:star::star::star::star: \n "
                                 ]
                                 // ,
                                 // "accessory": [
@@ -65,7 +65,7 @@ pipeline {
 
                         slackSend(channel: "#jenkins-notify", blocks: blocks)
 
-                        slackUploadFile filePath: '**/*.apk', initialComment:  "Here is builed SDK: 📝📝📝"
+                        slackUploadFile filePath: '**/*.apk', initialComment:  "Here is builded SDK:"
                     }
                 }
             }
