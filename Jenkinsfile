@@ -50,13 +50,12 @@ pipeline {
                                 "text": [
                                     "type": "mrkdwn",
                                     "text": "*SDK has been builded successfully*:star::star::star::star: \n "
+                                ] ,
+                                "accessory": [
+                                    "type": "image",
+                                    "image_url": "https://content.mqvnaa01.rogo.com.vn/uploads/logo_rogo_adb1277325.svg",
+                                    "alt_text": "alt text for image"
                                 ]
-                                // ,
-                                // "accessory": [
-                                //     "type": "image",
-                                //     "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/c7ed05m9lC2EmA3Aruue7A/o.jpg",
-                                //     "alt_text": "alt text for image"
-                                // ]
                             ],
                             [
                                 "type": "divider"
@@ -70,19 +69,18 @@ pipeline {
                 }
             }
         }
-        //  stage('Send Email') {
-        //     steps {
-        //         script {
-        //             def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn'] // Replace with the email addresses of the recipients
-        //             def recipientList = recipients.join(',')
-        //             emailext to: recipientList,
-        //             from: 'jenkins@rogo.com.vn',
-        //             subject: 'Android SDK Build Complete',
-        //             body: 'The Android SDK has been built and attached to this email.',
-        //             attachmentsPattern: '**/*.apk'
-        //         }
-        //     }
-        // }
+         stage('Send Email') {
+            steps {
+                script {
+                    def recipients = ['ltdat@rogo.com.vn', 'tan.nguyenvan@rogo.com.vn'] // Replace with the email addresses of the recipients
+                    def recipientList = recipients.join(',')
+                    emailext to: recipientList,
+                    from: 'jenkins@rogo.com.vn',
+                    subject: 'Android SDK Build Complete',
+                    body: 'The Android SDK has been built and attached to this email.',
+                }
+            }
+        }
     }
     post { 
         failure { 
@@ -97,8 +95,8 @@ pipeline {
 
                         def attachments = [
                             [
-                                text: 'I find your lack of faith disturbing!',
-                                fallback: 'Hey, Vader seems to be mad at you.',
+                                text: 'Hey, JENKINS seems to be mad at your FAILED 🧑‍🎤🧑‍🎤🧑‍🎤.',
+                                fallback: 'Hey, JENKINS seems to be mad at your FAILED 🧑‍🎤🧑‍🎤🧑‍🎤.',
                                 color: '#ff0000'
                             ]
                         ]
